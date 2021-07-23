@@ -1,0 +1,31 @@
+
+proxy:
+  title: Open Analytics Shiny Proxy
+  logo-url: https://www.openanalytics.eu/shinyproxy/logo.png
+  landing-page: /
+  heartbeat-rate: 10000
+  heartbeat-timeout: 60000
+  port: 8080
+  authentication: simple
+  admin-groups: scientists
+  # Example: 'simple' authentication configuration
+  users:
+  - name: jack
+    password: password
+    groups: scientists
+  - name: jeff
+    password: password
+    groups: mathematicians
+  specs:
+  - id: vscode
+    container-image: codercom/code-server:latest
+    port: 8080
+    container-cmd: ["/usr/bin/entrypoint.sh", "--bind-addr", "0.0.0.0:8080", "--auth=none", "--disable-update-check", "--disable-telemetry", "."]
+    websocket-reconnection-mode: None
+  - id: theia-python
+    container-image: theiaide/theia-python:latest
+    port: 3000
+    websocket-reconnection-mode: None
+logging:
+  file:
+    name: shinyproxy.log
