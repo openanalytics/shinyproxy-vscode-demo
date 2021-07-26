@@ -3,7 +3,7 @@
 [Screenshots](#screenshots)
 
 This repository explains how to run VS Code and Eclipse Theia as a native webapp
-in ShinyProxy.
+in ShinyProxy. This example works in ShinyProxy 2.5.0 or later.
 
 ## Building the Docker image
 
@@ -13,7 +13,7 @@ The VS Code project does not provide official Docker images for running VS Code
 as a webapp. Fortunately, the [Code Server](https://github.com/cdr/code-server)
 project provides ready to use Docker images. Note that the VS Code provided in
 these images are not using the official builds of Microsoft, therefore they do
-not use the same Marketplace as the VS Code you can download from the Microsoft
+not use the same Marketplace as the VS Code which you can download from the Microsoft
 site, [see their FAQ](https://github.com/cdr/code-server/blob/main/docs/FAQ.md#why-cant-code-server-use-microsofts-extension-marketplace).
 
 You can pull the Docker image using:
