@@ -48,35 +48,37 @@ Create a ShinyProxy configuration file (see [application.yml](application.yml)
 for a complete file), containing:
 
 ```yaml
-specs:
-- id: vscode
-  container-image: codercom/code-server:latest
-  port: 8080
-  container-cmd: ["/usr/bin/entrypoint.sh", "--bind-addr", "0.0.0.0:8080", "--auth=none", "--disable-update-check", "--disable-telemetry", "."]
-  websocket-reconnection-mode: None
-- id: theia-python
-  container-image: theiaide/theia-python:latest
-  port: 3000
-  websocket-reconnection-mode: None
+proxy:
+  specs:
+    - id: vscode
+      container-image: codercom/code-server:latest
+      port: 8080
+      container-cmd: ["/usr/bin/entrypoint.sh", "--bind-addr", "0.0.0.0:8080", "--auth=none", "--disable-update-check", "--disable-telemetry", "."]
+      websocket-reconnection-mode: None
+    - id: theia-python
+      container-image: theiaide/theia-python:latest
+      port: 3000
+      websocket-reconnection-mode: None
 ```
 
 Both projects require minimal configuration in ShinyProxy to work. An
 improvement on this setup could be to mount a persistent workspace for the user:
 
 ```yaml
-specs:
-- id: vscode
-  container-image: codercom/code-server:latest
-  port: 8080
-  container-cmd: ["/usr/bin/entrypoint.sh", "--bind-addr", "0.0.0.0:8080", "--auth=none", "--disable-update-check", "--disable-telemetry", "/workspace"]
-  container-volumes: [ "/tmp/vscode/#{proxy.userId}/work:/workspace"]
-  websocket-reconnection-mode: None
-- id: theia-python
-  container-image: theiaide/theia-python:latest
-  container-volumes: [ "/tmp/theia/#{proxy.userId}/work:/home/project"]
-  container-env:
-  port: 3000
-  websocket-reconnection-mode: None
+proxy:
+  specs:
+    - id: vscode
+      container-image: codercom/code-server:latest
+      port: 8080
+      container-cmd: ["/usr/bin/entrypoint.sh", "--bind-addr", "0.0.0.0:8080", "--auth=none", "--disable-update-check", "--disable-telemetry", "/workspace"]
+      container-volumes: [ "/tmp/vscode/#{proxy.userId}/work:/workspace"]
+      websocket-reconnection-mode: None
+    - id: theia-python
+      container-image: theiaide/theia-python:latest
+      container-volumes: [ "/tmp/theia/#{proxy.userId}/work:/home/project"]
+      container-env:
+      port: 3000
+      websocket-reconnection-mode: None
 ```
 
 **Note**: by default the processes in the VS Code image run under a non-root
