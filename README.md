@@ -24,12 +24,14 @@ sudo docker pull codercom/code-server:latest
 
 ### Eclipse Theia
 
-The Theia project provides a number of different Docker images, providing out of
-the box support for different programming environments. As an example you can
-pull the Docker image containing the Python toolchain:
+> Eclipse Theia is an extensible framework to develop full-fledged multi-language Cloud & Desktop IDEs and tools with state-of-the-art web technologies.
+
+(from [Theia GitHub](https://github.com/eclipse-theia/theia))
+
+As an example you can pull the Docker image containing the base IDE:
 
 ```bash
-sudo docker pull theiaide/theia-python:latest
+sudo docker pull ghcr.io/eclipse-theia/theia-blueprint/theia-ide
 ```
 
 ### Installing Extensions
@@ -55,8 +57,8 @@ proxy:
       port: 8080
       container-cmd: ["/usr/bin/entrypoint.sh", "--bind-addr", "0.0.0.0:8080", "--auth=none", "--disable-update-check", "--disable-telemetry", "."]
       websocket-reconnection-mode: None
-    - id: theia-python
-      container-image: theiaide/theia-python:latest
+    - id: theia
+      container-image: ghcr.io/eclipse-theia/theia-blueprint/theia-ide
       port: 3000
       websocket-reconnection-mode: None
 ```
@@ -73,8 +75,8 @@ proxy:
       container-cmd: ["/usr/bin/entrypoint.sh", "--bind-addr", "0.0.0.0:8080", "--auth=none", "--disable-update-check", "--disable-telemetry", "/workspace"]
       container-volumes: [ "/tmp/vscode/#{proxy.userId}/work:/workspace"]
       websocket-reconnection-mode: None
-    - id: theia-python
-      container-image: theiaide/theia-python:latest
+    - id: theia
+      container-image: ghcr.io/eclipse-theia/theia-blueprint/theia-ide
       container-volumes: [ "/tmp/theia/#{proxy.userId}/work:/home/project"]
       container-env:
       port: 3000
