@@ -103,4 +103,4 @@ Docker image.
 
 ![Eclipse Theia](.github/screenshots/theia.png)
 
-**(c) Copyright Open Analytics NV, 2021.**
+**(c) Copyright Open Analytics NV, 2021-2024.**
