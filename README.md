@@ -31,7 +31,7 @@ sudo docker pull codercom/code-server:latest
 As an example you can pull the Docker image containing the base IDE:
 
 ```bash
-sudo docker pull ghcr.io/eclipse-theia/theia-blueprint/theia-ide
+sudo docker pull ghcr.io/eclipse-theia/theia-ide/theia-ide
 ```
 
 ### Installing Extensions
@@ -41,7 +41,9 @@ You can customize the VS Code image so it contains some extensions by default:
 ```Dockerfile
 FROM codercom/code-server:latest
 
-RUN code-server --install-extension ikuyadeu.r-pack
+RUN code-server --install-extension reditorsupport.r
+RUN code-server --install-extension rdebugger.r-debugger
+RUN code-server --install-extension rconsole.vsc-r-console
 ```
 
 ## ShinyProxy Configuration
@@ -58,7 +60,7 @@ proxy:
       container-cmd: ["/usr/bin/entrypoint.sh", "--bind-addr", "0.0.0.0:8080", "--auth=none", "--disable-update-check", "--disable-telemetry", "."]
       websocket-reconnection-mode: None
     - id: theia
-      container-image: ghcr.io/eclipse-theia/theia-blueprint/theia-ide
+      container-image: ghcr.io/eclipse-theia/theia-ide/theia-ide
       port: 3000
       websocket-reconnection-mode: None
 ```
@@ -76,7 +78,7 @@ proxy:
       container-volumes: [ "/tmp/vscode/#{proxy.userId}/work:/workspace"]
       websocket-reconnection-mode: None
     - id: theia
-      container-image: ghcr.io/eclipse-theia/theia-blueprint/theia-ide
+      container-image: ghcr.io/eclipse-theia/theia-ide/theia-ide
       container-volumes: [ "/tmp/theia/#{proxy.userId}/work:/home/project"]
       container-env:
       port: 3000
@@ -103,4 +105,4 @@ Docker image.
 
 ![Eclipse Theia](.github/screenshots/theia.png)
 
-**(c) Copyright Open Analytics NV, 2021-2024.**
+**(c) Copyright Open Analytics NV, 2021-2026.**

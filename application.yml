@@ -23,7 +23,7 @@ proxy:
     container-cmd: ["/usr/bin/entrypoint.sh", "--bind-addr", "0.0.0.0:8080", "--auth=none", "--disable-update-check", "--disable-telemetry", "."]
     websocket-reconnection-mode: None
   - id: theia
-    container-image: ghcr.io/eclipse-theia/theia-blueprint/theia-ide
+    container-image: ghcr.io/eclipse-theia/theia-ide/theia-ide
     port: 3000
     websocket-reconnection-mode: None
 logging:
